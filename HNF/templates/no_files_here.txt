@@ -1,0 +1,1 @@
+This files is empty. Put your templates for cgis in this directory.
