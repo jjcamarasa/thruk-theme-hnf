@@ -6,7 +6,7 @@
 2. Enlaces y creditos
 - Iconos Material Design: https://materialdesignicons.com/
 - Iconos Font Awesome: https://fontawesome.com
-- Estilo Vatour: github.com/ynlamy/vautour-style
+- Estilo Vatour: https://github.com/ynlamy/vautour-style
 - Interfaz de nagios Thruk: http://www.thruk.org/
 
 3. Instalación
