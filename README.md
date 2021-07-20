@@ -4,10 +4,10 @@
 - Se han cambiado todos los iconos posibles a iconos de font-awesome o materialdesign para obtener una vista uniforme.
 
 ## 2. Enlaces y creditos
-- Iconos Material Design: https://materialdesignicons.com/
+- Iconos Material Design: https://materialdesignicons.com
 - Iconos Font Awesome: https://fontawesome.com
 - Estilo Vatour: https://github.com/ynlamy/vautour-style
-- Interfaz de nagios Thruk: http://www.thruk.org/
+- Interfaz de nagios Thruk: http://www.thruk.org
 
 ## 3. Instalación
 Descomprimir en la carpeta de temas de thruk (normalmente /usr/share/thruk/themes/themes-available) y crear un enlace en /etc/thruk/themes/themes-enabled.
