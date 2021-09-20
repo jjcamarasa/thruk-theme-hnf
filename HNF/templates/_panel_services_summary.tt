@@ -1,0 +1,256 @@
+<div class="card card-info card-outline">
+ <div class="card-header">
+  <span class="text-big-1"><i class="fas fa-cog"></i> Service status summary</span>
+ </div>
+ 
+ <div class="card-body">
+	<div class="row">
+<!-- Panel Critical -->
+[% IF service_stats.critical > 0 %]
+<div class="col">
+ <div class="info-box bg-danger text-red border-red">
+	<span class="info-box-icon">
+	  <i class="fas fa-times-circle fa-2x"></i>
+	</span>
+  <div class="info-box-content">
+	<span class="info-box-text text-big-1">
+	 <a class="text-red" href='status.cgi?host=all&amp;stye=detail&amp;servicestatustypes=16' >[% service_stats.critical %] Critical</a>
+	<br>
+	[% IF !empty && service_stats.critical_and_unhandled > 0 %]
+	<a class="text-red" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=16&amp;hoststatustypes=3&amp;serviceprops=42'>[% service_stats.critical_and_unhandled %] Unhandled</a>	
+	<br>
+	[% END %]
+
+	[% IF !empty && service_stats.critical_on_down_host > 0  %]
+	<a class="text-red" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=16&amp;hoststatustypes=12'>[% service_stats.critical_on_down_host %] on Problem Hosts</a>
+	<br>
+	[% END %]
+
+	[% IF !empty && service_stats.critical_and_scheduled > 0 %]
+	<a class="text-red" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=16&amp;serviceprops=1'>[% service_stats.critical_and_scheduled %] Scheduled</a>
+	<br>
+	[% END %]
+
+	[% IF !empty && service_stats.critical_and_ack > 0 %]
+	<a class="text-red" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=16&amp;serviceprops=4'>[% service_stats.critical_and_ack %] Acknowledged</a>
+	<br>
+	[% END %]
+
+	[% IF strict_passive_mode %]
+	 [% IF !empty && service_stats.critical_and_disabled_active > 0  %]
+	<a class="text-red" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=16&amp;serviceprops=131088'>[% service_stats.critical_and_disabled_active %] Disabled</a>
+	<br>
+	 [% END %]
+	[% IF !empty && service_stats.critical_and_disabled_passive > 0  %]
+	<a class="text-red" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=16&amp;serviceprops=65552'>[% service_stats.critical_and_disabled_passive %] Passive</a>
+	<br>
+	[% END %]
+	[% ELSE %]
+	[% IF !empty && service_stats.critical_and_disabled_active + service_stats.critical_and_disabled_passive > 0  %]
+	<a class="text-red" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=16&amp;serviceprops=16'>[% service_stats.critical_and_disabled_active + service_stats.critical_and_disabled_passive %] Disabled</a>
+	<br>
+	[% END %]
+	[% END %]
+	</span>
+  </div>
+ </div>
+</div> <!-- col critical -->
+[% END %]
+<!-- Panel Critical -->
+
+<!-- Panel Warning -->
+[% IF service_stats.warning > 0 %]
+<div class="col">
+  <div class="info-box bg-warning text-yellow border-yellow">
+	<span class="info-box-icon">
+		<i class="fas fa-exclamation-triangle fa-2x"></i>
+	</span>
+
+	<div class="info-box-content">
+	<span class="info-box-text text-big-1">
+	 <a class="text-yellow" href='status.cgi?hostgroup=all&amp;style=hostdetail&amp;hoststatustypes=4'>[% service_stats.warning %] Warning</a>
+	 <br>
+	[% IF !empty && service_stats.warning_and_unhandled > 0 %]
+	  <a class="text-yellow" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=4&amp;hoststatustypes=3&amp;serviceprops=42'>
+	[% service_stats.warning_and_unhandled %] Unhandled</a>
+	<br>
+	[% END %]
+
+	[% IF !empty && service_stats.warning_on_down_host > 0  %]
+	 <a class="text-yellow" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=4&amp;hoststatustypes=12'>
+	[% service_stats.warning_on_down_host %] on Problem Hosts</a>
+	<br>
+	[% END %]
+
+	[% IF !empty && service_stats.warning_and_scheduled > 0 %]
+	  <a class="text-yellow" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=4&amp;serviceprops=1'>
+	[% service_stats.warning_and_scheduled %] Scheduled</a>
+	<br>
+	[% END %]
+
+	[% IF !empty && service_stats.warning_and_ack > 0       %]
+	  <a class="text-yellow" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=4&amp;serviceprops=4'>
+	[% service_stats.warning_and_ack %] Acknowledged</a>
+	<br>
+	[% END %]
+
+	[% IF strict_passive_mode %]
+	[% IF !empty && service_stats.warning_and_disabled_active > 0  %]
+	<a class="text-yellow" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=4&amp;serviceprops=131088'>
+	[% service_stats.warning_and_disabled_active %] Disabled</a>
+	<br>
+	[% END %]
+
+	[% IF !empty && service_stats.warning_and_disabled_passive > 0  %]
+	<a class="text-yellow" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=4&amp;serviceprops=65552'>
+	[% service_stats.warning_and_disabled_passive %] Passive</a>
+	<br>
+	[% END %]
+	[% ELSE %]
+	[% IF !empty && service_stats.warning_and_disabled_active + service_stats.warning_and_disabled_passive > 0  %]
+	<a class="text-yellow" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=4&amp;serviceprops=16'>
+	[% service_stats.warning_and_disabled_active + service_stats.warning_and_disabled_passive %] Disabled</a>
+	<br>
+	[% END %]
+	[% END %]
+	</span>
+	</div>
+ </div>
+</div> <!-- col warning -->
+ [% END %]
+<!-- Panel Warning -->
+
+<!-- Panel UNKNOWN -->
+[% IF service_stats.unknown > 0 %]
+<div class="col">
+ <div class="info-box bg-purple text-purple border-purple">
+	<span class="info-box-icon">
+	  <i class="fas fa-question-circle fa-2x"></i>
+	</span>
+
+	<div class="info-box-content">
+	<span class="info-box-text text-big-1">
+	  <a class="text-purple" href='status.cgi?host=all&amp;stye=detail&amp;servicestatustypes=8' >[% service_stats.unknown %] Unknown</a>
+	 <br>
+
+	[% IF !empty && service_stats.unknown_and_unhandled > 0 %]
+	 <a class="text-purple" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=8&amp;hoststatustypes=3&amp;serviceprops=42'>[% service_stats.unknown_and_unhandled %] Unhandled</a>
+	 <br>
+	[% END %]
+
+	[% IF !empty && service_stats.unknown_on_down_host > 0  %]
+	<a class="text-purple" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=8&amp;hoststatustypes=12'>[% service_stats.unknown_on_down_host %] on Problem Hosts</a>
+	<br>
+	 [% END %]
+
+	[% IF !empty && service_stats.unknown_and_scheduled > 0 %]
+	<a class="text-purple" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=8&amp;serviceprops=1'>[% service_stats.unknown_and_scheduled %] Scheduled</a>
+	<br>
+	 [% END %]
+
+	[% IF !empty && service_stats.unknown_and_ack > 0       %]
+	<a class="text-purple" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=8&amp;serviceprops=4'>[% service_stats.unknown_and_ack %] Acknowledged</a>
+	<br>
+	 [% END %]
+
+	[% IF strict_passive_mode %]
+
+	[% IF !empty && service_stats.unknown_and_disabled_active > 0  %]
+	 <a class="text-purple" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=8&amp;serviceprops=131088'>[% service_stats.unknown_and_disabled_active %] Disabled</a>
+	 <br>
+	 [% END %]
+
+	[% IF !empty && service_stats.unknown_and_disabled_passive > 0  %]
+	  <a class="text-purple" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=8&amp;serviceprops=65552'>[% service_stats.unknown_and_disabled_passive %] Passive</a>
+	  <br>
+	 [% END %]
+
+	[% ELSE %]
+
+	[% IF !empty && service_stats.unknown_and_disabled_active + service_stats.unknown_and_disabled_passive > 0  %]
+	  <a class="text-purple" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=8&amp;serviceprops=16'>[% service_stats.unknown_and_disabled_active + service_stats.unknown_and_disabled_passive %] Disabled
+	  <br>
+	  [% END %]
+	  [% END %]
+	  </span>
+	</div>
+ </div>
+</div> <!-- col unknown -->
+ [% END %]
+<!-- Panel UNKNOWN -->
+
+<!-- </div>
+
+	<div class="row">-->
+[% IF service_stats.ok > 0 %]
+<!-- Panel OK -->
+<div class="col">
+  <div class="info-box bg-success text-green border-green">
+	  <span class="info-box-icon"><i class="fas fa-check fa-2x"></i></span>
+
+	<!--<div class="col-8 text-center text-v-center">-->
+	<div class="info-box-content">		
+	 <span class="info-box-text text-big-1">
+	   <a class="text-green" href='status.cgi?hostgroup=all&amp;style=hostdetail&amp;hoststatustypes=4'>[% service_stats.ok %] OK</a>
+	   <br>
+	[% IF !empty && service_stats.ok_and_scheduled > 0 %]
+	  <a class="text-green" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=2&amp;serviceprops=1'>[% service_stats.ok_and_scheduled %] Scheduled</a>
+	  <br>
+	[% END %]
+
+	[% IF strict_passive_mode %]
+	[% IF !empty && service_stats.ok_and_disabled_active > 0  %]
+	  <a class="text-green" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=2&amp;serviceprops=131088'>[% service_stats.ok_and_disabled_active %] Disabled</a>
+	  <br>
+	[% END %]
+
+	[% IF !empty && service_stats.ok_and_disabled_passive > 0  %]
+	  <a class="text-green" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=2&amp;serviceprops=65552'>[% service_stats.ok_and_disabled_passive %] Passive</a>
+	  <br>
+	[% END %]
+	[% ELSE %]
+	[% IF !empty && service_stats.ok_and_disabled_active + service_stats.ok_and_disabled_passive > 0  %]
+	  <a class="text-green" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=2&amp;serviceprops=16'>[% service_stats.ok_and_disabled_active + service_stats.ok_and_disabled_passive %] Disabled</a>
+	  <br>
+	[% END %]
+	[% END %]
+		</span>
+	 </div>
+	</div>
+</div> 
+[% END %]
+<!-- PANEL OK -->
+
+<!-- Panel PENDING -->
+[% IF service_stats.pending > 0 %]
+<div class="col">
+ <div class="info-box bg-info text-white border-info-50">
+	<span class="info-box-icon"><i class="fas fa-question-circle fa-2x"></i></span>
+  <div class="info-box-content">
+	<span class="info-box-text text-big-1">
+   <a class="text-white" href='status.cgi?host=all&amp;stye=detail&amp;servicestatustypes=1' >[% service_stats.pending %] Pending</a>
+   <br>
+   
+ [% IF !empty && service_stats.pending_and_scheduled > 0 %]
+	 <a class="text-white" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=1&amp;serviceprops=1'>[% service_stats.pending_and_scheduled %] Scheduled
+	 </a>
+	 <br>
+ [% END %]
+
+ [% IF !empty && service_stats.pending_and_disabled > 0  %]
+	 <a class="text-white" href='status.cgi?host=all&amp;type=detail&amp;servicestatustypes=1&amp;serviceprops=16'>[% service_stats.pending_and_disabled %] Disabled
+	 </a>
+	<br>
+ [% END %]
+   </span>
+  </div>
+ </div>
+</div> <!-- col pending -->
+[% END %]
+<!-- Panel PENDING -->
+
+
+	</div>
+
+ </div> <!-- card-body -->
+</div> <!-- card -->

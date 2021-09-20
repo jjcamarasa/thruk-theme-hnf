@@ -1,0 +1,14 @@
+[% IF !empty && host_stats.outages > 0 %]
+[% thisValue = 'bg-danger' %]
+[% ELSE %]
+[% thisValue = 'bg-success' %]
+[% END %]
+<div class="card card-info card-outline">
+  <div class="card-header">
+    <span class="h5"><i class="fas fa-network-wired"></i> Network Status</span>
+   </div>
+  <div class="card-body [% thisValue %]">
+    <p class="text-center"><span class="h2">[% host_stats.outages %]</span> Blocking Outages</p>
+  </div>
+</div>
+</div>

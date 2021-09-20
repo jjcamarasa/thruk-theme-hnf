@@ -1,0 +1,58 @@
+<div class="card card-outline">
+  <div class="card-header">
+    <span class="h5"><i class="fas fa-heartbeat"></i> Network Health</span>
+  </div>
+  <div class="card-body">
+
+    [% IF empty || (host_stats.total-host_stats.pending) == 0 %]
+    [% host_health = 0 %]
+    [% ELSE %]
+    [% host_health = host_stats.up / (host_stats.total-host_stats.pending) * 100 %]
+    [% END %]
+    [% health_perc = sprintf('%i', host_health) %]
+
+    [% IF health_perc >= 90 %] 
+    [% hostcss = 'bg-success text-green' %]
+    [% ELSIF health_perc >= 75 %] 
+    [% hostcss = 'bg-warning text-yellow' %]
+    [% ELSIF health_perc >= 5 %]
+    [% hostcss = 'bg-danger text-red' %]
+    [% ELSE %]
+    [% hostcss = 'bg-danger text-red' %]
+     [% health_perc = 5 %]
+    [% END %]
+    <div class="progress-group">
+      Host Health
+      <div class="progress progress-sm">
+        <div class="progress-bar [% hostcss %]" style="width:[% health_perc %]%" max="100">
+          [% health_perc %]%
+        </div>
+      </div>
+    </div>
+
+
+    [% IF empty || (service_stats.total-service_stats.pending) == 0 %]
+    [ % service_health = 0 %]
+    [% ELSE %]
+    [% service_health = (service_stats.ok*2 + service_stats.warning + service_stats.unknown) /
+    ((service_stats.total-service_stats.pending)*2) * 100 %]
+    [% END %]
+    [% service_perc = sprintf('%i', service_health) %]
+    [% IF service_health >= 90 %]
+    [% svccss ='bg-success text-green' %]
+    [% ELSIF service_health >= 75 %]
+    [% svccss ='bg-warning text-yellow' %]
+    [% ELSIF service_health >= 5 %]
+    [% svccss ='bg-danger text-red' %]
+     [% service_perc = 5 %]
+    [% END %]
+    <div class="progress-group">
+      Service Health
+      <div class="progress progress-sm">
+        <div class="progress-bar [% svccss %]" style="width:[% service_perc %]%" max="100">
+          [% service_perc %]%
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

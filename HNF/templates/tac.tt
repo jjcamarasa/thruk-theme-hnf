@@ -1,0 +1,52 @@
+﻿[% PROCESS _header.tt %]
+[% PROCESS _message.tt %]
+[% PROCESS _sounds.tt %]
+[% SET empty = 0 %]
+[% SET empty = 1 UNLESS host_stats %]
+
+<div class="row">
+  <div class="col-3">
+    [% PROCESS _infobox.tt %]
+    [% PROCESS _json_export.tt %]
+  </div>
+  <div class="col-6">
+    [% PROCESS _help.tt topic = "tac" %]
+  </div>
+</div>
+
+<div class="row">
+  <!-- PANEL HOSTS -->
+  <div class="col">
+    [% PROCESS _panel_hosts_summary.tt %]
+  </div>
+</div>
+
+<div class="row">
+<!-- PANEL SERVICES -->
+  <div class="col">
+    [% PROCESS _panel_services_summary.tt %]
+  </div>
+</div><!-- FIN PANEL SERVICES -->
+
+<!-- PANEL MONITORING PERF -->
+<div class="row">
+  <div class="col-4">
+    [% PROCESS _panel_monitoring_performance.tt %]
+  </div>
+
+  <div class="col-2">
+   [% PROCESS _panel_network_health.tt %]
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4">
+    [% PROCESS _panel_monitoring_features.tt %]
+  </div>
+
+  <div class="col-2">
+    [% PROCESS _panel_network_outages.tt %]
+  </div>
+</div>
+
+[% PROCESS _footer.tt %]

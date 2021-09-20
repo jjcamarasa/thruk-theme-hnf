@@ -1,0 +1,56 @@
+<div class="card card-info card-outline">
+	<div class="card-header">
+		<span class="text-big-1">Monitoring Performance</span>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-6">
+				Service Check Execution Time
+			</div>
+			<div class="col-5">
+				<a href='extinfo.cgi?type=4'>[% sprintf('%.2f',stats.services_execution_time_min) %] / [% sprintf('%.2f',stats.services_execution_time_max) %] / [% sprintf('%.3f',stats.services_execution_time_avg) %] sec</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				Service Check Latency
+			</div>
+			<div class="col-5">
+				<a href='extinfo.cgi?type=4'>[% sprintf('%.2f',stats.services_latency_min) %] / [% sprintf('%.2f',stats.services_latency_max) %] / [% sprintf('%.3f',stats.services_latency_avg) %] sec</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				Host Check Execution Time
+			</div>
+			<div class="col-5">
+				<a href='extinfo.cgi?type=4'>[% sprintf('%.2f',stats.hosts_execution_time_min) %] / [% sprintf('%.2f',stats.hosts_execution_time_max) %] / [% sprintf('%.3f',stats.hosts_execution_time_avg) %] sec</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				Host Check Latency
+			</div>
+			<div class="col-5">
+				<a href='extinfo.cgi?type=4'>[% sprintf('%.2f',stats.hosts_latency_min) %] / [% sprintf('%.2f',stats.hosts_latency_max) %] / [% sprintf('%.3f',stats.hosts_latency_avg) %] sec</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				Active Host / Service Checks
+			</div>
+			<div class="col-5">
+				<a href='status.cgi?hostgroup=all&amp;hostprops=131072&amp;style=hostdetail'>[% IF !empty %][% host_stats.total_active %][% ELSE %]0[% END %]</a> / <a href='status.cgi?host=all&amp;serviceprops=131072'>[% IF !empty %][% service_stats.total_active %][% ELSE %]0[% END %]</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				Passive Host / Service Checks
+			</div>
+			<div class="col-5">
+				<a href='status.cgi?hostgroup=all&amp;hostprops=65536&amp;style=hostdetail'>[% IF !empty %][% host_stats.total_passive %][% ELSE %]0[% END %]</a> / <a href='status.cgi?host=all&amp;serviceprops=65536'>[% IF !empty %][% service_stats.total_passive %][% ELSE %]0[% END %]</a>
+			</div>
+		</div>
+	</div>
+</div>
+	

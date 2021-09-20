@@ -1,0 +1,203 @@
+<div class="card card-info card-outline">
+ <div class="card-header">
+	<span class="text-big-1">Monitoring Features</span>
+ </div>
+
+ <div class="card-body">
+ <div class="row">
+  <div class="col-3">Flap Detection</div>
+  <div class="col">
+	[% IF pi.keys.size == 0 || pi.enable_flap_detection == 1 %]
+		<span class="enabledpill">Enabled</span>
+	[% ELSIF pi.enable_flap_detection == -1 %]
+		<span class="infopill">Ambiguous</span>
+	  [% ELSE %]
+		<span class="disabledpill">Disabled</span>
+	  [% END %]
+
+	  [% IF pi.keys.size > 0 && pi.enable_flap_detection == 0 %]
+	  [% ELSE %]
+			[% IF empty || service_stats.flapping_disabled == 0 %]
+			[% ELSE %]
+			 <span class="pl-1">
+			  <a href='status.cgi?host=all&amp;type=detail&amp;serviceprops=512'>[% service_stats.flapping_disabled %] Service Disabled
+			  </a>
+			 </span>
+			[% END %]
+			[% IF !empty && service_stats.flapping > 0 %]
+			 <span class="pl-1">
+			  <a href='status.cgi?host=all&amp;type=detail&amp;serviceprops=1024'>[% service_stats.flapping %] Services Flapping
+			  </a>
+			 </span>
+			[% ELSE %]
+			[% END %]
+			[% IF empty || host_stats.flapping_disabled == 0 %]
+			[% ELSE %]
+			 <span class="pl-1">
+			  <a href='status.cgi?host=all&amp;style=hostdetail&amp;hostprops=256'>[% host_stats.flapping_disabled %] Host Disabled
+			  </a>
+			 </span>
+			[% END %]
+			[% IF host_stats.flapping %]
+			 <span class="pl-1">
+			  <a href='status.cgi?host=all&amp;style=hostdetail&amp;hostprops=1024'>[% host_stats.flapping %] Hosts Flapping
+			  </a>
+			 </span>
+			[% ELSE %]
+			[% END %]
+	  [% END %]
+    </div>
+ </div>
+ <div class="row">
+	<div class="col-3">Notifications</div>
+	<div class="col">
+	[% IF pi.keys.size == 0 || pi.enable_notifications == 1 %]
+	 <span class="enabledpill"> Enabled</span>
+	[% ELSIF pi.enable_notifications == -1 %]
+	 <span class="infopill"> Ambiguous</span>
+	[% ELSE %]
+	 <span class="disabledpill"> Disabled</span>
+	[% END %]
+
+	[% IF pi.keys.size > 0 && pi.enable_notifications == 0 %]
+	 <span class="infopill"> N/A</span>
+	[% ELSE %]
+	[% IF empty || service_stats.notifications_disabled == 0 %]
+	 <span class="enabledpill"> All Services Enabled</span>
+	[% ELSE %]
+	 <span class="pl-1">
+	  <a href='status.cgi?host=all&amp;type=detail&amp;serviceprops=4096'>[% service_stats.notifications_disabled %] Services Disabled
+	  </a>
+	 </span>
+	[% END %]
+	[% IF empty || host_stats.notifications_disabled == 0 %]
+	 <span class="enabledpill"> All Hosts Enabled</span>
+	[% ELSE %]
+	 <span class="pl-1">
+	  <a href='status.cgi?host=all&amp;style=hostdetail&amp;hostprops=4096'>[% host_stats.notifications_disabled %] Host Disabled
+	  </a>
+	 </span>
+	[% END %]
+	[% END %]
+	</div>
+ </div>
+  	<div class="row">
+	<div class="col-3">Event Handlers</div>
+	<div class="col">
+	[% IF pi.keys.size == 0 || pi.enable_event_handlers == 1 %]
+	 <span class="enabledpill"> Enabled</span>
+	[% ELSIF pi.enable_event_handlers == -1 %]
+	 <span class="infopill"> Ambiguous</span>
+	  [% ELSE %]
+	 <span class="disabledpill"> Disabled</span>
+	  [% END %]
+	  [% IF pi.keys.size > 0 && pi.enable_event_handlers == 0 %]
+	  [% ELSE %]
+			[% IF empty || service_stats.eventhandler_disabled == 0 %]
+			[% ELSE %]
+				<span class="pl-1">
+				 <a href='status.cgi?host=all&amp;type=detail&amp;serviceprops=64'>[% service_stats.eventhandler_disabled %] Service Disabled
+				 </a>
+				</span>
+			[% END %]
+			[% IF empty || host_stats.eventhandler_disabled == 0 %]
+			[% ELSE %]
+				<span class="pl-1">
+				 <a href='status.cgi?host=all&amp;style=hostdetail&amp;hostprops=64'>[% host_stats.eventhandler_disabled %] Hosts Disabled
+				 </a>
+				</span>
+			[% END %]
+	  [% END %]
+	</div>
+	</div>
+  	<div class="row">
+	<div class="col-3">Active Checks</div>
+	<div class="col">
+	[% IF pi.keys.size == 0 || pi.execute_service_checks == 1 %]
+	 <span class="enabledpill"> Enabled</span>
+	[% ELSIF pi.execute_service_checks == -1 %]
+	 <span class="infopill"> Ambiguous</span>
+	[% ELSE %]
+	 <span class="disabledpill"> Disabled</span>
+	  [% END %]
+	  [% IF pi.keys.size > 0 && pi.execute_service_checks == 0 %]
+	  [% ELSE %]
+		  [% IF empty || service_stats.active_checks_disabled_active + service_stats.active_checks_disabled_passive == 0 %]
+		  [% ELSE %]
+			[% IF strict_passive_mode %]
+			  [% IF service_stats.active_checks_disabled_active > 0 %]
+				<span class="pl-1">
+				 <a href='status.cgi?host=all&amp;type=detail&amp;serviceprops=131088'>[% service_stats.active_checks_disabled_active %] Services Disabled
+				 </a>
+				</span>
+	[% END %]
+			  [% IF service_stats.active_checks_disabled_passive > 0 %]
+				<span class="pl-1">
+				 <a href='status.cgi?host=all&amp;type=detail&amp;serviceprops=65552'>[% service_stats.active_checks_disabled_passive %] Services Passive
+				 </a>
+				</span>
+	[% END %]
+			[% ELSE %]
+			  <span class="pl-1">
+			   <a href='status.cgi?host=all&amp;type=detail&amp;serviceprops=16'>[% service_stats.active_checks_disabled_active + service_stats.active_checks_disabled_passive %] Services Disabled
+			   </a>
+			  </span>
+			[% END %]
+		  [% END %]
+		  [% IF empty || host_stats.active_checks_disabled_active + host_stats.active_checks_disabled_passive == 0 %]
+		  [% ELSE %]
+			[% IF strict_passive_mode %]
+			  [% IF host_stats.active_checks_disabled_active > 0 %]
+				<span class="pl-1">
+				 <a href='status.cgi?host=all&amp;style=hostdetail&amp;hostprops=131088'>[% host_stats.active_checks_disabled_active %] Hosts Disabled
+				 </a>
+				</span>
+	[% END %]
+			  [% IF host_stats.active_checks_disabled_passive > 0 %]
+				<span class="pl-1">
+				 <a href='status.cgi?host=all&amp;style=hostdetail&amp;hostprops=65552'>[% host_stats.active_checks_disabled_passive %] Hosts Passive
+				 </a>
+				</span>
+	[% END %]
+			[% ELSE %]
+				<span class="pl-1">
+				 <a href='status.cgi?host=all&amp;style=hostdetail&amp;hostprops=16'>[% host_stats.active_checks_disabled_active + host_stats.active_checks_disabled_passive %] Hosts Disabled
+				 </a>
+				</span>
+			[% END %]
+		  [% END %]
+	  [% END %]
+	</div>
+	</div>
+  	<div class="row">	
+	<div class="col-3">Passive Checks</div>
+	<div class="col">
+	[% IF pi.keys.size == 0 || pi.accept_passive_service_checks == 1 %]
+	 <span class="enabledpill"> Enabled</span>
+	[% ELSIF pi.accept_passive_service_checks == -1 %]
+	 <span class="infopill"> Ambiguous</span>
+	  [% ELSE %]
+	 <span class="disabledpill"> Disabled</span>
+	  [% END %]
+	  [% IF pi.keys.size > 0 && pi.accept_passive_service_checks == 0 %]
+	  [% ELSE %]
+			[% IF empty || service_stats.passive_checks_disabled == 0 %]
+			[% ELSE %]
+			 <span class="pl-1">
+			  <a href='status.cgi?host=all&amp;type=detail&amp;serviceprops=16384'>[% service_stats.passive_checks_disabled %] Service Disabled
+			  </a>
+			 </span>
+			[% END %]
+			[% IF empty || host_stats.passive_checks_disabled == 0 %]
+			[% ELSE %]
+			 <span class="pl-1">
+			  <a href='status.cgi?host=all&amp;style=hostdetail&amp;hostprops=16384'>[% host_stats.passive_checks_disabled %] Host Disabled
+			  </a>
+			 </span>
+			[% END %]
+	  [% END %]
+	</div>
+ 	</div>
+ </div>
+
+</div>
