@@ -4,4 +4,4 @@ Solo existe un tema. No se actualiza.
 Modificado el TAC.
 
 ## Versión 3.xx
-Css Tabler. Se ha adaptado los templates para hacer uso del tema.
+Ver el repositorio de [templates](https://github.com/jjcamarasa/thruk3-templates)
